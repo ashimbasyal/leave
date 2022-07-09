@@ -1,33 +1,40 @@
-// To parse this JSON data, do
-//
-//     final leave = leaveFromJson(jsonString);
+class LeaveModel {
+  int? id;
+  String? leaveDate;
+  String? leaveFor;
+  String? description;
+  String? status;
+  String? requestedBy;
+  String? signatureImagePath;
 
-import 'dart:convert';
+  LeaveModel(
+      {this.id,
+      this.leaveDate,
+      this.leaveFor,
+      this.description,
+      this.status,
+      this.requestedBy,
+      this.signatureImagePath});
 
-Leave leaveFromJson(String str) => Leave.fromJson(json.decode(str));
+  LeaveModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    leaveDate = json['leaveDate'];
+    leaveFor = json['leaveFor'];
+    description = json['description'];
+    status = json['status'];
+    requestedBy = json['requestedBy'];
+    signatureImagePath = json['signatureImagePath'];
+  }
 
-String leaveToJson(Leave data) => json.encode(data.toJson());
-
-class Leave {
-  Leave({
-    required this.leaveDate,
-    required this.leaveFor,
-    required this.signature,
-  });
-
-  String leaveDate;
-  String leaveFor;
-  String signature;
-
-  factory Leave.fromJson(Map<String, dynamic> json) => Leave(
-        leaveDate: json["LeaveDate"],
-        leaveFor: json["LeaveFor"],
-        signature: json["Signature"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "LeaveDate": leaveDate,
-        "LeaveFor": leaveFor,
-        "Signature": signature,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['leaveDate'] = leaveDate;
+    data['leaveFor'] = leaveFor;
+    data['description'] = description;
+    data['status'] = status;
+    data['requestedBy'] = requestedBy;
+    data['signatureImagePath'] = signatureImagePath;
+    return data;
+  }
 }
